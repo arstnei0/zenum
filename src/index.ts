@@ -12,19 +12,32 @@ type Matchers<T, R = any> =
 			_: (data: T[keyof T]) => R
 	  })
 
-type Zitem<T, K extends keyof T = keyof T> = [K,T[K]]
+type Zitem<T, K extends keyof T = keyof T> = [K, T[K]]
 
 class Zenum<T extends Record<string | symbol, any>> {
-	match<K extends keyof T, R>(item: Zitem<T, K>, matchers: Matchers<T, R>) {
-		return (matchers[item[0]] || matchers._)(item[1])
+	match<R, K extends keyof T>(
+		item: Zitem<T, K>,
+		matchers: Matchers<T, R>
+	): R {
+		return (
+			matchers[item[0]] ||
+			matchers._ ||
+			((data) => {
+				throw new Error(
+					`No matchers found! The data received (json): ${JSON.stringify(
+						data
+					)}`
+				)
+			})
+		)(item[1])
 	}
 
 	item<K extends keyof T>(k: K, data: T[K]): Zitem<T, K> {
 		return [k, data]
 	}
 
-	any<K extends keyof T>(data: T[K]): Zitem<T> {
-		return data
+	_any<K extends keyof T>(data: T[K]): Zitem<T> {
+		return ["?", data]
 	}
 }
 
@@ -47,40 +60,6 @@ export const zenum = <T>(): ZenumFactory<T> => {
 	return proxy
 }
 
-export type itemof<T extends { any: any }> = ReturnType<T["any"]>
+export type itemof<T extends { _any: any }> = ReturnType<T["_any"]>
 
 export default zenum
-
-type Data = any
-
-const Response = zenum<{
-	loading: null
-	error: Error
-	success: Data
-}>()
-
-const query = {
-	isLoading: false,
-	isError: false,
-	error: undefined,
-	data: "WOW",
-} /** ...(Some query) */
-const res = query.isLoading
-	? Response.loading(null)
-	: query.isError
-	? Response.error(query.error)
-	: Response.success(query.data)
-
-Response.match(res, {
-	success: (data) => {
-		console.log(`Received data successfully: `)
-		console.log(data)
-	},
-	error: (error) => {
-		console.log(`An unknown error occured!`)
-		console.error(error)
-	},
-	loading: () => {
-		console.log(`The data is being fetched...`)
-	},
-})
