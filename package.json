@@ -1,0 +1,17 @@
+{
+	"name": "zenum",
+	"version": "1.0.0",
+	"description": "Better enum!",
+	"main": "dist/index.mjs",
+	"scripts": {
+		"build": "unbuild",
+		"dev": "unbuild && node dist/index.mjs"
+	},
+	"author": "Zihan Chen",
+	"type": "module",
+	"types": "dist/index.d.ts",
+	"devDependencies": {
+		"unbuild": "^1.0.2"
+	},
+	"homepage": "https://github.com/zihan-ch/zenum"
+}
