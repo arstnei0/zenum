@@ -2,6 +2,7 @@
 <h1>Zenum</h1>
 
 A better enum for simplicity and typesafety.
+
 </center>
 
 ## About
@@ -19,22 +20,58 @@ pnpm add zenum@latest
 ```
 
 Import Zenum:
-```ts
-import { zenum } from 'zenum'
-// or
-import zenum from 'zenum'
 
-// These two imports are the same thing
+```ts
+// These two imports are the same
+import { zenum } from "zenum"
+import zenum from "zenum"
 ```
 
 Create a new Zenum Factory:
+
 ```ts
 type Data = any
 
 const Response = zenum<{
-    loading: null,
-    error: Error,
-    success: Data
+	loading: undefined
+	error: Error
+	success: Data
 }>()
 ```
 
+Create a actual response item:
+
+```ts
+const query = {
+	isLoading: false,
+	isError: false,
+	error: undefined,
+	data: "WOW",
+} /** Some query */
+
+const res = query.isLoading
+	? Response.loading(null)
+	: query.isError
+	? Response.error(query.error)
+	: Response.success(query.data)
+```
+
+Now you can match the item:
+
+```ts
+Response.match(res, {
+	success: (data) => {
+		console.log(`Received data successfully: `)
+		console.log(data)
+	},
+	error: (error) => {
+		console.log(`An unknown error occured!`)
+		console.error(error)
+	},
+	loading: () => {
+		console.log(`The data is being fetched...`)
+	},
+})
+```
+
+Wow! The code is so clear!
