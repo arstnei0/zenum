@@ -18,9 +18,13 @@ class Zenum<T extends Record<string | symbol, any>> {
 	item<K extends keyof T>(k: K, data: T[K]): Zitem<T, K> {
 		return { _: k, $: data }
 	}
+
+	any<K extends keyof T>(data: T[K]): Zitem<T> {
+		return data
+	}
 }
 
-type ZenumFactory<T> = InstanceType<typeof Zenum<T>> & {
+type ZenumFactory<T = any> = InstanceType<typeof Zenum<T>> & {
 	[K in keyof T]: (data: Zitem<T, K>["$"]) => Zitem<T, K>
 }
 
@@ -34,3 +38,7 @@ export const zenum = <T>(): ZenumFactory<T> => {
 
 	return proxy
 }
+
+export type itemof<T extends { any: any }> = ReturnType<T["any"]>
+
+export default zenum
