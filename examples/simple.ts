@@ -5,7 +5,7 @@ const Response = zenum<{
 	success: Data
 	error: Error
 	loading: never
-}>();
+}>()
 type Response = typeof Response.Item
 
 const resSuccess = Response.success("Hello Zenum!")

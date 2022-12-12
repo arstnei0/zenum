@@ -6,7 +6,8 @@
 	"scripts": {
 		"build": "tsup --minify",
 		"dev": "tsup --watch",
-		"d": "node dist/dev.js"
+		"d": "node dist/dev.js",
+		"format": "prettier --write ."
 	},
 	"author": "Zihan Chen",
 	"type": "module",
