@@ -7,7 +7,6 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.46.1
       '@typescript-eslint/parser': ^5.46.1
       eslint: ^8.29.0
-      fast-glob: ^3.2.12
       prettier: ^2.8.1
       typescript: ^4.9.4
       vite: ^4.0.1
@@ -17,7 +16,6 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.46.1_imrg37k3svwu377c6q7gkarwmi
       '@typescript-eslint/parser': 5.46.1_ha6vam6werchizxrnqvarmz2zu
       eslint: 8.29.0
-      fast-glob: 3.2.12
       prettier: 2.8.1
       typescript: 4.9.4
       vite: 4.0.1
