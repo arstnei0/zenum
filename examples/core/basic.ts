@@ -1,5 +1,5 @@
-import { zenum } from "zenum"
-import { printAndAssert } from "../utils/results"
+import { Matchers, zenum } from "zenum"
+import { printAndAssert } from "./utils/results"
 
 type Data = string
 const Response = zenum<{
@@ -14,6 +14,10 @@ const resLoading = Response.loading()
 const resError = Response.error(new Error("A fetch error occured!"))
 
 const responses = [resSuccess, resLoading, resError] // Gather all the responses generated into an array
+
+Response.match(resSuccess, {
+	
+})
 
 responses.forEach((response) =>
 	Response.match(response, {

@@ -5,6 +5,15 @@ importers:
   .:
     specifiers: {}
 
+  examples/core:
+    specifiers:
+      unbuild: ^1.0.2
+      zenum: workspace:*
+    dependencies:
+      zenum: link:../../packages/core
+    devDependencies:
+      unbuild: 1.0.2
+
   examples/react-query:
     specifiers:
       '@tanstack/react-query': ^4.19.1
