@@ -1,3 +1,5 @@
 .prettier*
 src
 examples
+vite.config.ts
+.eslint*
