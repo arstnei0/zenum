@@ -5,13 +5,19 @@ A better enum for simplicity and typesafety.
 
 </center>
 
+## Table of Contents
+
+1. [About](#about)
+2. [Basic Zenums](#basic-zenums)
+3. [Safe Zenums](#safe-zenums)
+
 ## About
 
 Zenum has only two exports! The source code has only about 60 lines (with prettier)!
 
 The project [TS Pattern](https://github.com/gvergnaud/ts-pattern) which is quite similar to Zenum is great, but it's not simply enough and sometimes its syntax is way trivial. For some simple usages (also in most cases), Zenum is enough and TS Pattern is too big and superfluous. But for more complex uses, I still recommend you to use TS Pattern which is undoubtedly well designed and implemented. Nonetheless, you won't need TS Pattern's big system in most cases.
 
-## Usage
+## Basic Zenums
 
 Use TypeScript!
 
@@ -33,29 +39,17 @@ Create a new Zenum Factory:
 
 ```ts
 type Data = string
-
 const Response = zenum<{
-	loading: undefined
-	error: Error
 	success: Data
+	error: Error
+	loading: never
 }>()
 ```
 
 Create a actual response item:
 
 ```ts
-const query = {
-	isLoading: false,
-	isError: false,
-	error: undefined,
-	data: "WOW",
-} /** Some query */
-
-const res = query.isLoading
-	? Response.loading(null)
-	: query.isError
-	? Response.error(query.error)
-	: Response.success(query.data)
+const res = Response.success("Hello Zenum!")
 ```
 
 Now you can match the item:
@@ -74,6 +68,7 @@ Response.match(res, {
 		console.log(`The data is being fetched...`)
 	},
 })
+// This will print `Received data successfully: Hello Zenum!`
 ```
 
 Wow! The code is so clear!
@@ -96,29 +91,30 @@ Response.match(res, {
 })
 ```
 
-If the `_` is not set, a type error will occur. Always remember to match all the item types for safety. If some types of items don'
-t need to be processed, just use `_() {},` to ignore them explicitly.
+If the `_` is not set, a type error will occur. Always remember to match all the item types for safety. If some types of items don't need to be processed, just use `_() {},` to ignore them explicitly.
 
-I think you won't need to use this type inference utility, but I still made it.
+You can use `typeof <Zenum>.Item` to get the type of the Zenum.
 
 ```ts
-import { zenum, itemof } from "zenum"
-
 type Data = string
 
 const Response = zenum<{
-	loading: undefined
-	error: Error
 	success: Data
+	error: Error
+	loading: never
 }>()
-
-type Response = itemof<typeof Response>
+type Response = typeof Response.Item
 ```
 
-The type `Response` isn't really typesafe enough. Therefore, you should ony use these ones:
+Here are some different ways to create Zitems (I call it `Zitem`, it's just items).
 
 ```ts
-const resLoading = Response.loading()
+const resLoading = Response.item("loading", undefined) // You need to pass an undefined explicitly!
+const resError = Response.item("error", new Error("Some error message"))
+const resSuccess = Response.item("success", "Some data received")
+
+// Syntactic sugar
+const resLoading = Response.loading() // Here you don't need to pass the undefined.
 const resError = Response.error(new Error("Some error message"))
 const resSuccess = Response.success("Some data received")
 ```
@@ -126,6 +122,7 @@ const resSuccess = Response.success("Some data received")
 Also, you can use the match result:
 
 ```ts
+const res = Response.loading()
 const ready = Response.match(res, {
 	success: (data) => {
 		console.log(`Received data successfully: `)
@@ -142,6 +139,7 @@ const ready = Response.match(res, {
 		return false
 	},
 })
+// ready = true
 ```
 
 Caution: all the matcher functions should return the same thing! This will cause a type error:
@@ -153,6 +151,7 @@ const ready = Response.match(res, {
 		console.log(data)
 		return true
 	},
+	// This function has a type error because it's not returning a boolean
 	error: (error) => {
 		console.log(`An unknown error occured!`)
 		console.error(error)
@@ -186,4 +185,12 @@ const ready = Response.match(res, {
 })
 ```
 
-That's all! Happy TypeScripting, Guy!
+These are the basic usage of the **unsafe** Zenums. Yes, there are safer Zenums.
+
+## Safe Zenums
+
+Work in Progress...
+
+## More
+
+I will write examples of Zenum for almost all the features. The examples are in [the `examples` directory of this repo](https://github.com/zihan-ch/zenum/tree/main/examples). The examples of Zenum itself is in the [`examples/core` directory](https://github.com/zihan-ch/zenum/tree/main/examples/core). 
