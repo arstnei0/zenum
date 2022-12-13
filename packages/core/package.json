@@ -9,7 +9,7 @@
 	},
 	"author": "Zihan Chen",
 	"type": "module",
-	"types": "dist/src/index.d.ts",
+	"types": "dist/index.d.ts",
 	"homepage": "https://github.com/zihan-ch/zenum",
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.46.1",
