@@ -1,0 +1,13 @@
+{
+	"name": "examples",
+	"scripts": {
+		"build": "unbuild"
+	},
+	"private": true,
+	"dependencies": {
+		"zenum": "workspace:*"
+	},
+	"devDependencies": {
+		"unbuild": "^1.0.2"
+	}
+}

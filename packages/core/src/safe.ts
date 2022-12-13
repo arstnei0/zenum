@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Matchers, zenum, ZitemCreationSugur } from "./unsafe"
+import { Matchers, zenum, ZitemCreationSugur } from "./unsafe.js"
 
 export type SafeZitem<
 	TD extends SafeTypeDef = any,

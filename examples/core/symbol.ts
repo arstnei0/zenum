@@ -1,4 +1,4 @@
-import { zenum } from "../src/index.js"
+import { zenum } from "zenum"
 
 const success = Symbol()
 const loading = Symbol()
