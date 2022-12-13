@@ -1,12 +1,13 @@
 export { z } from "zod"
-export { safeZenum, ZenumError } from "./safe.js"
+export { safeZenum, ZenumError } from "./safe"
 export type {
 	SafeMatchers,
 	SafeTypeDef,
 	SafeZenumFactory,
 	SafeZitem,
 	SafeZitemData,
-	SafeZitemType,
+	SafeZitemType
 } from "./safe.js"
-export { zenum as default, zenum } from "./unsafe.js"
-export type { Matchers, ZenumFactory, Zitem, ZitemData, ZitemType } from "./unsafe.js"
+export { zenum as default, zenum } from "./unsafe"
+export type { Matchers, ZenumFactory, Zitem, ZitemData, ZitemType } from "./unsafe"
+

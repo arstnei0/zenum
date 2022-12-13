@@ -1,4 +1,4 @@
-import { Matchers, zenum } from "zenum"
+import { zenum } from "zenum"
 import { printAndAssert } from "./utils/results"
 
 type Data = string
@@ -14,10 +14,6 @@ const resLoading = Response.loading()
 const resError = Response.error(new Error("A fetch error occured!"))
 
 const responses = [resSuccess, resLoading, resError] // Gather all the responses generated into an array
-
-Response.match(resSuccess, {
-	
-})
 
 responses.forEach((response) =>
 	Response.match(response, {
@@ -54,16 +50,3 @@ printAndAssert(results, [
 	"The data is still loading...",
 	"An error occured: A fetch error occured!",
 ])
-
-// const query = {
-// 	isLoading: false,
-// 	isError: false,
-// 	error: undefined,
-// 	data: "WOW",
-// } /** Some query */
-
-// const res = query.isLoading
-// 	? Response.loading(null)
-// 	: query.isError
-// 	? Response.error(query.error)
-// 	: Response.success(query.data)

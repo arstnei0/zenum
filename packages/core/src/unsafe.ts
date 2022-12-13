@@ -31,7 +31,10 @@ export class Zenum<T extends Record<Key, any>> {
 		return item[0]
 	}
 
-	match<R, K extends ZitemType<Zitem<T>>>(item: Zitem<T, K>, matchers: Matchers<T, R>): R {
+	match<R, K extends ZitemType<Zitem<T>>>(
+		item: Zitem<T, K>,
+		matchers: Matchers<T, R>
+	): R {
 		return (
 			matchers[this.type(item)] ||
 			matchers._ ||
@@ -41,7 +44,10 @@ export class Zenum<T extends Record<Key, any>> {
 		)(this.data(item))
 	}
 
-	run<R, K extends ZitemType<Zitem<T>>>(item: Zitem<T, K>, matchers: Partial<Matchers<T, R>>): R {
+	run<R, K extends ZitemType<Zitem<T>>>(
+		item: Zitem<T, K>,
+		matchers: Partial<Matchers<T, R>>
+	): R {
 		return this.match(item, matchers as Matchers<T, R>)
 	}
 
@@ -71,13 +77,33 @@ export type ZitemCreationSugur<T> = {
 		: (data: ZitemData<Zitem<T, K>>) => Zitem<T, K>
 }
 
-export type ZenumFactory<T = any> = InstanceType<typeof Zenum<T>> & ZitemCreationSugur<T>
+export type ZenumFactory<T = any> = {
+	data<I extends keyof T>(item: Zitem<T, I>): T[I]
+	type<K extends keyof T>(item: Zitem<T, K>): K
+	match<R, K extends keyof T>(item: Zitem<T, K>, matchers: Matchers<T, R>): R
+	run<R, K extends keyof T>(
+		item: Zitem<T, K>,
+		matchers: Partial<Matchers<T, R>>
+	): R
+	item<K extends keyof T>(k: K, data: T[K]): Zitem<T, K>
+	semantic<K extends keyof T>(
+		item: Zitem<T, K>
+	): {
+		type: K
+		data: T[K]
+	}
+	is<K extends keyof T, I extends Zitem<T, keyof T>>(key: K, item: I): ZitemType<I> extends K ? true : boolean
+	Item: Zitem<T, keyof T>
+} & ZitemCreationSugur<T>
 
 export function zenum<T>(): ZenumFactory<T> {
 	const zenum = new Zenum<T>()
 	const proxy = new Proxy(zenum, {
 		get(target, p, receiver) {
-			return target[p] ?? ((data: T[ZitemType<Zitem<T>>]) => target.item(p as any, data))
+			return (
+				target[p] ??
+				((data: T[ZitemType<Zitem<T>>]) => target.item(p as any, data))
+			)
 		},
 	}) as ZenumFactory<T>
 
