@@ -1,3 +1,5 @@
+export type Key = string | symbol
+
 export type Matchers<T = any, R = any> =
 	| {
 			[K in ZitemType<Zitem<T>>]: T[K] extends null
@@ -20,7 +22,7 @@ export type Zitem<T = any, K extends ZitemType<Zitem<T>> = keyof T> = [K, T[K]]
 export type ZitemType<I extends Zitem = Zitem> = I[0]
 export type ZitemData<I extends Zitem = Zitem> = I[1]
 
-export class Zenum<T extends Record<string | symbol, any> = Record<string | symbol, any>> {
+export class Zenum<T extends Record<Key, any> = Record<Key, any>> {
 	data<I extends ZitemType<Zitem<T>>>(item: Zitem<T, I>) {
 		return item[1]
 	}
@@ -53,6 +55,7 @@ export class Zenum<T extends Record<string | symbol, any> = Record<string | symb
 			data: this.data(item),
 		}
 	}
+
 	is<K extends ZitemType<Zitem<T>>, I extends Zitem<T>>(key: K, item: I) {
 		return key === this.type(item)
 	}
