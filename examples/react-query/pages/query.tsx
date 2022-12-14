@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { Query, queryToZenum } from "react-query-zenum"
 
-export default function Home() {
+export default function QueryPage() {
 	const [query, { refetch }] = queryToZenum(
 		useQuery({
 			queryKey: ["fetch"],
@@ -14,7 +14,7 @@ export default function Home() {
 
 	return Query.match(query, {
 		loading: () => <h1>Loading</h1>,
-		success(data) {
+		success(data: any) {
 			return (
 				<>
 					<h1>Data received: {JSON.stringify(data)}</h1>

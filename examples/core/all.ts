@@ -1,5 +1,5 @@
 import { zenum } from "zenum"
-import { printAndAssert } from "../utils/results.js"
+import { printAndAssert } from "./utils/results.js"
 
 type Data = string
 const Response = zenum<{

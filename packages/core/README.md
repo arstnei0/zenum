@@ -192,3 +192,5 @@ Work in Progress...
 ## More
 
 I will write examples of Zenum for almost all the features. The examples are in [the `examples` directory of this repo](https://github.com/zihan-ch/zenum/tree/main/examples). The examples of Zenum itself is in the [`examples/core` directory](https://github.com/zihan-ch/zenum/tree/main/examples/core).
+
+What are some real world situations that we can use Zenum? I wrote a helper package that converts a React Query into a Zenum. See it's [README.md](https://github.com/zihan-ch/zenum/tree/main/packages/react-query-zenum) to find more info.

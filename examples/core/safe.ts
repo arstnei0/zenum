@@ -1,5 +1,5 @@
 import { safeZenum, z, ZenumError } from "zenum"
-import { printAndAssert } from "../utils/results"
+import { printAndAssert } from "./utils/results"
 
 const Mutation = safeZenum({
 	id: z.number(),

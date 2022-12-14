@@ -5,7 +5,6 @@ export const Query = zenum<{
 	loading: undefined
 	error: any
 	success: any
-	paused: undefined
 }>()
 export type Query = typeof Query.Item
 
