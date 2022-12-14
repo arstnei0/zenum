@@ -13,8 +13,6 @@ A better enum for simplicity and typesafety.
 
 ## About
 
-Zenum has only two exports! The source code has only about 60 lines (with prettier)!
-
 The project [TS Pattern](https://github.com/gvergnaud/ts-pattern) which is quite similar to Zenum is great, but it's not simply enough and sometimes its syntax is way trivial. For some simple usages (also in most cases), Zenum is enough and TS Pattern is too big and superfluous. But for more complex uses, I still recommend you to use TS Pattern which is undoubtedly well designed and implemented. Nonetheless, you won't need TS Pattern's big system in most cases.
 
 ## Basic Zenums
@@ -193,4 +191,4 @@ Work in Progress...
 
 ## More
 
-I will write examples of Zenum for almost all the features. The examples are in [the `examples` directory of this repo](https://github.com/zihan-ch/zenum/tree/main/examples). The examples of Zenum itself is in the [`examples/core` directory](https://github.com/zihan-ch/zenum/tree/main/examples/core). 
+I will write examples of Zenum for almost all the features. The examples are in [the `examples` directory of this repo](https://github.com/zihan-ch/zenum/tree/main/examples). The examples of Zenum itself is in the [`examples/core` directory](https://github.com/zihan-ch/zenum/tree/main/examples/core).

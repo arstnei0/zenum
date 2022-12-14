@@ -1,5 +1,4 @@
 import * as rq from "@tanstack/react-query"
-import { SetReturnType } from "type-fest"
 import { zenum } from "zenum"
 
 export const Query = zenum<{

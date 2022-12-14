@@ -72,14 +72,14 @@ class SafeZenum<TD extends SafeTypeDef> {
 		if (Array.isArray(item) && item.length === 2) {
 			const type = this.type(item as any)
 			const def = this._def[type]
-	
+
 			if (def) {
 				const data = this.data(item as any)
 				const result = def.safeParse(data)
 				if (result.success) return this.Result.success(item as any)
 				else return this.Result.error(ZenumError.itemDataIllegal(data))
 			}
-	
+
 			return this.Result.error(ZenumError.itemTypeIllegal(type))
 		}
 

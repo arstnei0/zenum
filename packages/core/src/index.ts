@@ -6,8 +6,13 @@ export type {
 	SafeZenumFactory,
 	SafeZitem,
 	SafeZitemData,
-	SafeZitemType
+	SafeZitemType,
 } from "./safe.js"
 export { zenum as default, zenum } from "./unsafe"
-export type { Matchers, ZenumFactory, Zitem, ZitemData, ZitemType } from "./unsafe"
-
+export type {
+	Matchers,
+	ZenumFactory,
+	Zitem,
+	ZitemData,
+	ZitemType,
+} from "./unsafe"

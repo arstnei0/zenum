@@ -92,7 +92,10 @@ export type ZenumFactory<T = any> = {
 		type: K
 		data: T[K]
 	}
-	is<K extends keyof T, I extends Zitem<T, keyof T>>(key: K, item: I): ZitemType<I> extends K ? true : boolean
+	is<K extends keyof T, I extends Zitem<T, keyof T>>(
+		key: K,
+		item: I
+	): ZitemType<I> extends K ? true : boolean
 	Item: Zitem<T, keyof T>
 } & ZitemCreationSugur<T>
 
