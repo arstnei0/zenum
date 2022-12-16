@@ -17,6 +17,7 @@
 	"type": "module",
 	"files": [
 		"./dist/index.mjs",
-		"./dist/index.d.ts"
+		"./dist/index.d.ts",
+		"tsconfig.json"
 	]
 }
